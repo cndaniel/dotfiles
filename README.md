@@ -32,6 +32,44 @@ Then reload the shell:
 exec zsh -l
 ```
 
+## New Mac Quickstart
+
+On a fresh Mac, run these in order:
+
+```bash
+xcode-select --install
+```
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+```bash
+git clone git@github.com:cndaniel/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
+brew bundle --file ~/dotfiles/Brewfile
+exec zsh -l
+asdf install
+```
+
+Create private files as needed:
+
+```bash
+cp ~/dotfiles/gitconfig.local.example ~/.gitconfig.local
+cp ~/dotfiles/zshrc.private.example ~/.zshrc.private
+cp ~/dotfiles/zprofile.private.example ~/.zprofile.private
+cp ~/dotfiles/aliases.private.example ~/.aliases.private
+cp ~/dotfiles/tmux.conf.private.example ~/.tmux.conf.private
+```
+
+Verify the setup:
+
+```bash
+zsh -ic 'node -v; pnpm -v; ruby -v; tmux -V'
+brew doctor
+```
+
 ## Fresh Mac Setup
 
 Install the base toolchain first:
