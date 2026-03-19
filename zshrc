@@ -8,3 +8,8 @@ done
 
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.zshrc.private ]] && source ~/.zshrc.private
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/daniel/.lmstudio/bin"
+# End of LM Studio CLI section
+
