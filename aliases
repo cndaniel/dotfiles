@@ -1,19 +1,84 @@
-# Unix
-alias ll="ls -al"
 alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
+alias m="mvim -v"
+alias cl="clear"
+alias cursor="open -a 'Cursor'"
+alias c.="cursor ."
 
-# Bundler
-alias b="bundle"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -Iv"
+alias rmf="command rm -f"
+alias rrf="command rm -rf"
+alias sed="sed -E"
 
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
-alias s="rspec"
+if command -v eza >/dev/null 2>&1; then
+  alias ls="eza --group-directories-first --icons=auto"
+  alias ll="eza -lah --group-directories-first --icons=auto"
+else
+  alias ls="ls -FGh"
+  alias ll="ls -al"
+fi
 
-# Pretty print the path
-alias path='echo $PATH | tr -s ":" "\n"'
+alias path='printf "%s\n" "${path[@]}"'
+alias \$=""
 
-# Include custom aliases
-[[ -f ~/.aliases.local ]] && source ~/.aliases.local
+alias oc="opencode"
+alias ocn="opencode --new"
+alias ap="amp"
+alias cc="claude"
+alias cx="codex"
+
+alias lastcmd="fc -ln -1 | pbcopy && echo 'Copied last command'"
+alias tree-copy="tree -L 3 -I 'node_modules|.git|__pycache__|.venv' | pbcopy && echo 'Copied tree output'"
+alias diff-copy="git -c color.ui=false diff | pbcopy && echo 'Copied git diff'"
+alias agents="cat AGENTS.md 2>/dev/null || echo 'No AGENTS.md in current directory'"
+alias eagents="$EDITOR AGENTS.md"
+
+ai-snap() {
+  {
+    echo "PWD: $PWD"
+    echo
+
+    if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      echo "== git status -sb =="
+      git status -sb
+      echo
+
+      echo "== git diff --stat =="
+      git -c color.ui=false diff --stat
+      echo
+
+      echo "== git diff =="
+      git -c color.ui=false diff
+      echo
+
+      echo "== git diff --cached =="
+      git -c color.ui=false diff --cached
+      echo
+    fi
+
+    if command -v tree >/dev/null 2>&1; then
+      echo "== tree -L 3 =="
+      tree -L 3 -I "node_modules|.git|__pycache__|.venv|dist|build"
+    else
+      echo "== ls -la =="
+      ls -la
+    fi
+  } | pbcopy
+
+  echo "Copied context to clipboard (ai-snap)"
+}
+
+cpc() {
+  if [[ -f "$1" ]]; then
+    pbcopy < "$1"
+    echo "Copied $1 to clipboard"
+  else
+    echo "File not found: $1"
+  fi
+}
+
+[[ -f ~/.aliases.private ]] && source ~/.aliases.private

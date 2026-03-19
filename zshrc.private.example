@@ -1,0 +1,4 @@
+# Interactive-shell overrides that are specific to this machine.
+# Example:
+# export AI_DEFAULT_TOOL=codex
+# export SSH_KEY="$HOME/.ssh/rsa_id"

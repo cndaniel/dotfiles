@@ -1,5 +1,7 @@
 [init]
   templatedir = ~/.git_template
+[user]
+  useConfigOnly = true
 [push]
   default = current
 [color]

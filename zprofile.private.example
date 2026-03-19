@@ -1,0 +1,3 @@
+# Login-shell environment variables that are specific to this machine.
+# Example:
+# export ANDROID_HOME="$HOME/Library/Android/sdk"

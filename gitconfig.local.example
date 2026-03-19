@@ -1,0 +1,9 @@
+[user]
+  name = Your Name
+  email = you@example.com
+
+[diff]
+  tool = vscode
+
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE

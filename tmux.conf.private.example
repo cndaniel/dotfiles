@@ -1,0 +1,3 @@
+# Private tmux overrides.
+# Example:
+# set -g status-style bg="#444444",fg="#dddddd"

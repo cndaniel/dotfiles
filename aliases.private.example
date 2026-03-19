@@ -1,0 +1,3 @@
+# Personal aliases that should not be committed.
+# Example:
+# alias workvpn="open -a 'Some VPN Client'"
