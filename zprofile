@@ -13,6 +13,7 @@ path=(
   "$HOME/go/bin"
   "$HOME/.bin"
   "$HOME/.cargo/bin"
+  /opt/homebrew/sbin
   $path
 )
 path=(${path:#$HOME/.rvm/bin})

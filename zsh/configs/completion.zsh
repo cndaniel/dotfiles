@@ -1,7 +1,7 @@
 if command -v brew >/dev/null 2>&1; then
-  fpath=(~/.zsh/completion "$(brew --prefix)/share/zsh/site-functions" $fpath)
+  fpath=(~/.zsh/completions ~/.zsh/completion "$(brew --prefix)/share/zsh/site-functions" $fpath)
 else
-  fpath=(~/.zsh/completion $fpath)
+  fpath=(~/.zsh/completions ~/.zsh/completion $fpath)
 fi
 
 zmodload zsh/complist
