@@ -9,7 +9,7 @@ format = "[$user](bold cyan)"
 
 [hostname]
 ssh_only = false
-format = "[@DasMac](cyan) "
+format = "[@$hostname](cyan) "
 
 [directory]
 truncation_length = 3
