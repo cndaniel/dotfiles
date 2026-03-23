@@ -39,15 +39,19 @@ format = "took [$duration](bold yellow) "
 
 [nodejs]
 format = "[$symbol$version](green) "
-detect_files = ["package.json", ".node-version"]
+detect_files = ["package.json"]
+detect_folders = ["node_modules"]
 symbol = " "
 
 [python]
 format = "[$symbol$version](yellow) "
+detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
+detect_folders = [".venv", "venv"]
 symbol = " "
 
 [ruby]
 format = "[$symbol$version](red) "
+detect_files = ["Gemfile", ".ruby-version"]
 symbol = " "
 
 [docker_context]
