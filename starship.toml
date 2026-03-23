@@ -40,7 +40,6 @@ format = "took [$duration](bold 208) "
 [nodejs]
 format = "[$symbol$version](green) "
 detect_files = ["package.json"]
-detect_folders = ["node_modules"]
 symbol = " "
 
 [python]
