@@ -20,7 +20,7 @@ format = "[$path](bold blue) "
 format = "on [$branch](bold green) "
 
 [git_status]
-format = '([$staged$modified$untracked$deleted$ahead_behind](yellow)) '
+format = '([$staged$modified$untracked$deleted$ahead_behind](208)) '
 staged = '✚ '
 modified = '● '
 untracked = '+ '
@@ -35,7 +35,7 @@ error_symbol = "[❯](bold red)"
 
 [cmd_duration]
 min_time = 3_000
-format = "took [$duration](bold yellow) "
+format = "took [$duration](bold 208) "
 
 [nodejs]
 format = "[$symbol$version](green) "
@@ -44,7 +44,7 @@ detect_folders = ["node_modules"]
 symbol = " "
 
 [python]
-format = "[$symbol$version](yellow) "
+format = "[$symbol$version](208) "
 detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
 detect_folders = [".venv", "venv"]
 symbol = " "
