@@ -13,6 +13,7 @@ path=(
   "$HOME/go/bin"
   "$HOME/.bin"
   "$HOME/.cargo/bin"
+  "$HOME/.lmstudio/bin"
   /opt/homebrew/sbin
   $path
 )

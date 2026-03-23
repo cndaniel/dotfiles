@@ -3,6 +3,7 @@
 .bundle
 .byebug_history
 .env
+.env.local
 db/*.sqlite3
 log/*.log
 rerun.txt
@@ -10,4 +11,17 @@ tags
 !tags/
 tmp/**/*
 !tmp/cache/.keep
+
+# Python
 *.pyc
+__pycache__/
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# IDEs
+.idea/
+.vscode/settings.json
+*.code-workspace

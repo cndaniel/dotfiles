@@ -9,7 +9,3 @@ done
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.zshrc.private ]] && source ~/.zshrc.private
 
-# LM Studio CLI
-export PATH="$PATH:$HOME/.lmstudio/bin"
-
-
