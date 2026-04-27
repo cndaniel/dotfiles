@@ -1,5 +1,22 @@
 : "${AI_DEFAULT_TOOL:=opencode}"
 
+claude() {
+  local claude_path
+  claude_path="$(whence -p claude 2>/dev/null || true)"
+
+  if [ -n "$claude_path" ] && [ "$claude_path" != "$HOME/.local/share/mise/shims/claude" ]; then
+    "$claude_path" "$@"
+    return
+  fi
+
+  if command -v mise >/dev/null 2>&1 && mise which claude >/dev/null 2>&1; then
+    "$(mise which claude)" "$@"
+    return
+  fi
+
+  npx -y @anthropic-ai/claude-code "$@"
+}
+
 ai() {
   local tool
 
@@ -25,5 +42,5 @@ ai() {
     return 127
   fi
 
-  command "$tool" "$@"
+  "$tool" "$@"
 }
