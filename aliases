@@ -30,6 +30,7 @@ alias ocn="opencode --new"
 alias ap="amp"
 alias cc="claude"
 alias cx="codex"
+alias c=' CLAUDE_CODE_NO_FLICKER=1 CLAUDE_CODE_AUTO_COMPACT_WINDOW=400000 claude --dangerously-skip-permissions'
 
 alias lastcmd="fc -ln -1 | pbcopy && echo 'Copied last command'"
 alias tree-copy="tree -L 3 -I 'node_modules|.git|__pycache__|.venv' | pbcopy && echo 'Copied tree output'"
