@@ -2,12 +2,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
-# asdf 0.18+ (Go rewrite): only needs shims in PATH (set in zprofile)
-# and completions; source asdf.sh for env setup if available
-if [ -s /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-  source /opt/homebrew/opt/asdf/libexec/asdf.sh
-elif [ -s /usr/local/opt/asdf/libexec/asdf.sh ]; then
-  source /usr/local/opt/asdf/libexec/asdf.sh
+# mise: fast runtime version manager (reads .tool-versions)
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
 fi
 
 if command -v fd >/dev/null 2>&1; then
