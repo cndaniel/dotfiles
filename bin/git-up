@@ -2,5 +2,8 @@
 
 set -e
 
+default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+[ -z "$default_branch" ] && default_branch="main"
+
 git fetch origin
-git rebase origin/master "$@"
+git rebase "origin/$default_branch" "$@"

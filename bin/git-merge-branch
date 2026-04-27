@@ -2,5 +2,8 @@
 
 set -e
 
-git checkout master
+default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+[ -z "$default_branch" ] && default_branch="main"
+
+git checkout "$default_branch"
 git merge "@{-1}"
