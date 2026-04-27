@@ -1,0 +1,14 @@
+#!/bin/sh
+# Show Claude project name or default command for tmux window tabs
+# Usage: tmux-pane-title <pane_tty> <pane_current_command> <pane_current_path>
+
+tty="${1#/dev/}"
+cmd="$2"
+path="$3"
+
+# Check if claude is running on this tty
+if ps -t "$tty" -o args= 2>/dev/null | grep -q '[c]laude'; then
+    printf '✦%s' "$(basename "$path")"
+else
+    printf '%s' "$cmd"
+fi
