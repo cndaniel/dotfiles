@@ -2,3 +2,4 @@
 vim/bundle/
 *.private
 .DS_Store
+.claude/settings.local.json
