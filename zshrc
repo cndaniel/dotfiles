@@ -8,4 +8,3 @@ done
 
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.zshrc.private ]] && source ~/.zshrc.private
-
