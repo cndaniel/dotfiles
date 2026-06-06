@@ -43,6 +43,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 vim.opt.cursorline = true
 vim.opt.mouse = "a"
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.spellfile = vim.fn.expand("$HOME/.vim-spell-en.utf-8.add")
 vim.opt.complete:append("kspell")
@@ -57,11 +58,8 @@ local map = vim.keymap.set
 -- Switch between last two files
 map("n", "<Leader><Leader>", "<C-^>", { desc = "Switch last two files" })
 
--- Window navigation (works with vim-tmux-navigator)
-map("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Move to above window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+-- Window navigation: <C-h/j/k/l> is owned by vim-tmux-navigator, which also
+-- jumps seamlessly into adjacent tmux panes at the window edges.
 
 -- Clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")

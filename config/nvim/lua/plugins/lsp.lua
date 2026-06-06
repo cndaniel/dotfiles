@@ -8,6 +8,21 @@ return {
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
+      -- Diagnostics display
+      vim.diagnostic.config({
+        severity_sort = true,
+        virtual_text = { prefix = "●" },
+        float = { border = "rounded", source = true },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+          },
+        },
+      })
+
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       -- Set default capabilities for all servers
@@ -25,7 +40,7 @@ return {
 
       -- Mason auto-installs and auto-enables servers
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "pyright", "gopls" },
+        ensure_installed = { "lua_ls", "ts_ls", "pyright", "gopls", "ruby_lsp" },
       })
 
       -- LSP keymaps

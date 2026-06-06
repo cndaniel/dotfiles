@@ -5,11 +5,43 @@ return {
     event = "VeryLazy",
   },
 
-  -- Git signs in gutter
+  -- Git signs in gutter + hunk keymaps
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = {},
+    opts = {
+      on_attach = function(bufnr)
+        local gs = require("gitsigns")
+        local function map(l, r, desc)
+          vim.keymap.set("n", l, r, { buffer = bufnr, desc = desc })
+        end
+        map("]c", function()
+          if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else gs.nav_hunk("next") end
+        end, "Next hunk")
+        map("[c", function()
+          if vim.wo.diff then vim.cmd.normal({ "[c", bang = true }) else gs.nav_hunk("prev") end
+        end, "Prev hunk")
+        map("<Leader>hs", gs.stage_hunk, "Stage hunk")
+        map("<Leader>hr", gs.reset_hunk, "Reset hunk")
+        map("<Leader>hp", gs.preview_hunk, "Preview hunk")
+        map("<Leader>hb", function() gs.blame_line({ full = true }) end, "Blame line")
+        map("<Leader>hd", gs.diffthis, "Diff this")
+      end,
+    },
+  },
+
+  -- Statusline (Tokyo Night + powerline, matching the tmux bar)
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        theme = "tokyonight",
+        globalstatus = true,
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+      },
+    },
   },
 
   -- Git commands

@@ -11,6 +11,8 @@ return {
     { "<Leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help" },
     { "<Leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
     { "<Leader>fd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+    { "<Leader>fr", "<cmd>Telescope resume<cr>", desc = "Resume last picker" },
+    { "<Leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Grep word under cursor" },
   },
   config = function()
     local telescope = require("telescope")
