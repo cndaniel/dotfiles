@@ -21,3 +21,9 @@ brew "uv"
 brew "zoxide"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
+
+# Fonts — Ghostty terminal (see config/ghostty/config.ghostty)
+cask "font-maple-mono-nl-nf-cn"
+cask "font-symbols-only-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-noto-sans-mono-cjk-sc"
