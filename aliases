@@ -6,6 +6,9 @@ alias m="mvim -v"
 alias cl="clear"
 alias cursor="open -a 'Cursor'"
 alias c.="cursor ."
+alias o="open"
+alias o.="open ."
+alias reveal="open -R"
 
 alias cp="cp -iv"
 alias mv="mv -iv"
@@ -15,8 +18,18 @@ alias rrf="command rm -rf"
 alias sed="sed -E"
 
 if command -v eza >/dev/null 2>&1; then
-  alias ls="eza --group-directories-first"
-  alias ll="eza -lah --group-directories-first"
+  # icons + git column; OSC8-clickable filenames only on a real terminal (so pipes stay clean)
+  ls() {
+    local opts=(--group-directories-first --icons=auto)
+    [[ -t 1 ]] && opts+=(--hyperlink)
+    command eza "${opts[@]}" "$@"
+  }
+  ll() {
+    local opts=(-lah --git --group-directories-first --icons=auto)
+    [[ -t 1 ]] && opts+=(--hyperlink)
+    command eza "${opts[@]}" "$@"
+  }
+  alias lt="eza --tree --level=2 --icons=auto --group-directories-first"
 else
   alias ls="ls -FGh"
   alias ll="ls -al"

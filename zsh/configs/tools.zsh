@@ -1,6 +1,22 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# fzf: Tokyo Night colors + file/dir previews on Ctrl-T and Alt-C
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border \
+--color=fg:#a9b1d6,bg:-1,hl:#7aa2f7,fg+:#c0caf5,bg+:#283457,hl+:#7dcfff \
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#bb9af7,marker:#9ece6a,spinner:#bb9af7,header:#565f89"
+if command -v bat >/dev/null 2>&1; then
+  export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :200 {} 2>/dev/null || eza --tree --level=2 --color=always {} 2>/dev/null'"
+fi
+if command -v eza >/dev/null 2>&1; then
+  export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 --icons=auto --color=always {}'"
+fi
+
+# pretty, syntax-highlighted man pages
+if command -v bat >/dev/null 2>&1; then
+  export MANPAGER="sh -c 'col -bx | bat --language man --style=plain'"
+  export MANROFFOPT="-c"
+fi
 
 # mise: fast runtime version manager (reads .tool-versions)
 if command -v mise >/dev/null 2>&1; then
@@ -13,7 +29,8 @@ if command -v fd >/dev/null 2>&1; then
 fi
 
 if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
+  # replace cd with zoxide: `cd <partial>` jumps to a frecent match; `cdi` to pick
+  eval "$(zoxide init zsh --cmd cd)"
 fi
 
 if command -v direnv >/dev/null 2>&1; then

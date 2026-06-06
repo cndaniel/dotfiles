@@ -1,7 +1,18 @@
 add_newline = true
+palette = "tokyonight"
 
 format = """
 $username$hostname$directory$git_branch$git_status$python$nodejs$ruby$cmd_duration$line_break$character"""
+
+# Tokyo Night — matches the tmux status bar. Keys named after standard colors
+# (blue/cyan/green/red) override them, so existing styles pick up these hexes.
+[palettes.tokyonight]
+blue = "#7aa2f7"
+cyan = "#7dcfff"
+green = "#9ece6a"
+red = "#f7768e"
+orange = "#e0af68"
+purple = "#bb9af7"
 
 [username]
 show_always = true
@@ -20,7 +31,7 @@ format = "[$path](bold blue) "
 format = "on [$branch](bold green) "
 
 [git_status]
-format = '([$staged$modified$untracked$deleted$ahead_behind](208)) '
+format = '([$staged$modified$untracked$deleted$ahead_behind](orange)) '
 staged = '✚ '
 modified = '● '
 untracked = '+ '
@@ -35,7 +46,7 @@ error_symbol = "[❯](bold red)"
 
 [cmd_duration]
 min_time = 3_000
-format = "took [$duration](bold 208) "
+format = "took [$duration](bold orange) "
 
 [nodejs]
 format = "[$symbol$version](green) "
@@ -43,7 +54,7 @@ detect_files = ["package.json"]
 symbol = " "
 
 [python]
-format = "[$symbol$version](208) "
+format = "[$symbol$version](orange) "
 detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
 detect_folders = [".venv", "venv"]
 symbol = " "
