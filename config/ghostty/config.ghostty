@@ -1,0 +1,48 @@
+# Ghostty config — managed in ~/dotfiles/config/ghostty/config.ghostty
+# install.sh links it to ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+
+# Maple Mono NL NF CN = one font for CJK + Latin + Nerd icons (NL = no ligatures).
+# CJK is exactly 2x Latin width, so terminal columns never drift.
+# Symbols Nerd Font Mono stays as a safety net for any icon Maple might lack.
+# Order matters: first family wins per-glyph, later ones fill the gaps.
+font-family = "Maple Mono NL NF CN"
+font-family = "Symbols Nerd Font Mono"
+font-size = 18
+font-thicken = false
+adjust-cell-height = 2
+
+theme = TokyoNight Night
+
+background-opacity = 0.96
+background-blur-radius = 20
+macos-titlebar-style = transparent
+window-theme = dark
+window-padding-x = 10
+window-padding-y = 8
+window-save-state = always
+
+cursor-style = bar
+cursor-style-blink = true
+
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+quick-terminal-position = top
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+shell-integration = detect
+
+
+
+keybind = cmd+plus=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+zero=reset_font_size
+
+
+keybind = cmd+shift+comma=reload_config
+
+scrollback-limit = 5000000

@@ -13,6 +13,7 @@ link_file() {
 
 mkdir -p "$HOME_DIR/.zsh/configs" "$HOME_DIR/.zsh/completion" "$HOME_DIR/.zsh/functions"
 mkdir -p "$HOME_DIR/.config"
+mkdir -p "$HOME_DIR/Library/Application Support/com.mitchellh.ghostty"
 
 link_file "$DOTFILES_DIR/aliases" "$HOME_DIR/.aliases"
 link_file "$DOTFILES_DIR/.tool-versions" "$HOME_DIR/.tool-versions"
@@ -20,6 +21,7 @@ link_file "$DOTFILES_DIR/gitconfig" "$HOME_DIR/.gitconfig"
 link_file "$DOTFILES_DIR/tmux.conf" "$HOME_DIR/.tmux.conf"
 link_file "$DOTFILES_DIR/starship.toml" "$HOME_DIR/.config/starship.toml"
 link_file "$DOTFILES_DIR/config/nvim" "$HOME_DIR/.config/nvim"
+link_file "$DOTFILES_DIR/config/ghostty/config.ghostty" "$HOME_DIR/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 link_file "$DOTFILES_DIR/zlogin" "$HOME_DIR/.zlogin"
 link_file "$DOTFILES_DIR/zprofile" "$HOME_DIR/.zprofile"
 link_file "$DOTFILES_DIR/zshenv" "$HOME_DIR/.zshenv"
