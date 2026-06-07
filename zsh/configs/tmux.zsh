@@ -50,6 +50,10 @@ _tmux_auto_attach() {
   [[ -z "${ZSH_EXECUTION_STRING:-}" ]] || return 0
   command -v tmux >/dev/null 2>&1 || return 0
   [[ -n "$TMUX" ]] && return 0
+  # cmux is its own terminal multiplexer (native panes/tabs/sessions). Don't nest
+  # tmux inside it — that doubles prefix keys, status bars, and scrollbacks. cmux
+  # injects CMUX_WORKSPACE_ID into every shell it spawns, so bail when it's set.
+  [[ -n "${CMUX_WORKSPACE_ID:-}" ]] && return 0
   [[ -n "$NO_AUTO_TMUX" ]] && return 0
   _tmux_supported_terminal || return 0
 

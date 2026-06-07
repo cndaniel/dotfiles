@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  // Per-project cmux config. cmux reads ./.cmux/cmux.json when this repo is opened
+  // as a workspace. This defines a "Claude" workspace you can launch from the
+  // Command Palette (cmd+shift+p) or the new-workspace menu.
+  //
+  // Beginner/Claude-friendly on purpose: plain `claude` keeps its permission
+  // prompts (we do NOT pass --dangerously-skip-permissions). Copy this file into
+  // any other repo's .cmux/ to get the same layout there.
+  "commands": [
+    {
+      "name": "Claude",
+      "description": "Claude Code on the left, a working shell on the right.",
+      "keywords": ["claude", "agent", "ai"],
+      "workspace": {
+        "name": "dotfiles",
+        "cwd": ".",
+        "layout": {
+          "direction": "horizontal",
+          "split": 0.55,
+          "children": [
+            {
+              "pane": {
+                "surfaces": [
+                  {
+                    "type": "terminal",
+                    "name": "claude",
+                    "command": "claude",
+                    "focus": true
+                  }
+                ]
+              }
+            },
+            {
+              "pane": {
+                "surfaces": [
+                  {
+                    "type": "terminal",
+                    "name": "shell"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

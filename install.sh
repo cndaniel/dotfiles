@@ -13,7 +13,7 @@ link_file() {
 
 mkdir -p "$HOME_DIR/.zsh/configs" "$HOME_DIR/.zsh/completion" "$HOME_DIR/.zsh/functions"
 mkdir -p "$HOME_DIR/.config"
-mkdir -p "$HOME_DIR/Library/Application Support/com.mitchellh.ghostty"
+mkdir -p "$HOME_DIR/.config/ghostty" "$HOME_DIR/.config/cmux"
 
 link_file "$DOTFILES_DIR/aliases" "$HOME_DIR/.aliases"
 link_file "$DOTFILES_DIR/.tool-versions" "$HOME_DIR/.tool-versions"
@@ -21,7 +21,11 @@ link_file "$DOTFILES_DIR/gitconfig" "$HOME_DIR/.gitconfig"
 link_file "$DOTFILES_DIR/tmux.conf" "$HOME_DIR/.tmux.conf"
 link_file "$DOTFILES_DIR/starship.toml" "$HOME_DIR/.config/starship.toml"
 link_file "$DOTFILES_DIR/config/nvim" "$HOME_DIR/.config/nvim"
-link_file "$DOTFILES_DIR/config/ghostty/config.ghostty" "$HOME_DIR/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+# Ghostty config at the standard XDG path. cmux is a Ghostty-based terminal and reads
+# the same ~/.config/ghostty/config, so one file serves both — no App Support copy needed.
+link_file "$DOTFILES_DIR/config/ghostty/config.ghostty" "$HOME_DIR/.config/ghostty/config"
+# cmux app config (global). cmux only reads it; tracking it here version-controls it.
+link_file "$DOTFILES_DIR/config/cmux/cmux.json" "$HOME_DIR/.config/cmux/cmux.json"
 link_file "$DOTFILES_DIR/zlogin" "$HOME_DIR/.zlogin"
 link_file "$DOTFILES_DIR/zprofile" "$HOME_DIR/.zprofile"
 link_file "$DOTFILES_DIR/zshenv" "$HOME_DIR/.zshenv"

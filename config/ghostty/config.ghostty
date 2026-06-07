@@ -1,5 +1,5 @@
 # Ghostty config — managed in ~/dotfiles/config/ghostty/config.ghostty
-# install.sh links it to ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+# install.sh links it to ~/.config/ghostty/config (read by both Ghostty and cmux).
 
 # Maple Mono NL NF CN = one font for CJK + Latin + Nerd icons (NL = no ligatures).
 # CJK is exactly 2x Latin width, so terminal columns never drift.
