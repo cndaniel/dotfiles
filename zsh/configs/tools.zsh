@@ -28,11 +28,6 @@ if command -v fd >/dev/null 2>&1; then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-if command -v zoxide >/dev/null 2>&1; then
-  # replace cd with zoxide: `cd <partial>` jumps to a frecent match; `cdi` to pick
-  eval "$(zoxide init zsh --cmd cd)"
-fi
-
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
@@ -62,3 +57,11 @@ if [[ -o interactive && -t 0 && -t 1 && -z "${ZSH_EXECUTION_STRING:-}" ]]; then
 fi
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# zoxide must be initialized LAST: its doctor warns ("initialize zoxide right at
+# the end…") whenever another tool registers a chpwd hook after it. Keep this the
+# final hook-registering line — don't add mise/direnv/anything chpwd-based below.
+if command -v zoxide >/dev/null 2>&1; then
+  # replace cd with zoxide: `cd <partial>` jumps to a frecent match; `cdi` to pick
+  eval "$(zoxide init zsh --cmd cd)"
+fi
