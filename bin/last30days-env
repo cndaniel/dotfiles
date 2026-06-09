@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Render the last30days API-key .env from 1Password.
+#
+# Secrets live in 1Password; only the template (op:// references) is committed.
+# Re-run any time you add/rotate a key. Safe and idempotent.
+#
+#   bin/last30days-env
+#
+set -euo pipefail
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TPL="$DOTFILES_DIR/config/last30days/last30days.env.tpl"
+OUT="$HOME/.config/last30days/.env"
+
+if ! command -v op >/dev/null 2>&1; then
+  echo "op (1Password CLI) not installed — run: brew install 1password-cli" >&2
+  exit 1
+fi
+
+if ! op account get >/dev/null 2>&1; then
+  echo "Not signed in to 1Password CLI." >&2
+  echo "Open the 1Password app → Settings → Developer → enable" >&2
+  echo "'Integrate with 1Password CLI', then re-run this script." >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "$OUT")"
+op inject -f -i "$TPL" -o "$OUT"
+chmod 600 "$OUT"
+echo "Rendered $OUT (chmod 600)"

@@ -22,6 +22,10 @@ brew "zoxide"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
+# 1Password CLI — renders secret .env files from 1Password via `op inject`
+# (see bin/last30days-env and config/last30days/last30days.env.tpl)
+cask "1password-cli"
+
 # Fonts — Ghostty terminal (see config/ghostty/config.ghostty)
 cask "font-maple-mono-nl-nf-cn"
 cask "font-symbols-only-nerd-font"
