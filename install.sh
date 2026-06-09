@@ -14,6 +14,7 @@ link_file() {
 mkdir -p "$HOME_DIR/.zsh/configs" "$HOME_DIR/.zsh/completion" "$HOME_DIR/.zsh/functions"
 mkdir -p "$HOME_DIR/.config"
 mkdir -p "$HOME_DIR/.config/ghostty" "$HOME_DIR/.config/cmux"
+mkdir -p "$HOME_DIR/.claude/skills"
 
 link_file "$DOTFILES_DIR/aliases" "$HOME_DIR/.aliases"
 link_file "$DOTFILES_DIR/.tool-versions" "$HOME_DIR/.tool-versions"
@@ -26,6 +27,8 @@ link_file "$DOTFILES_DIR/config/nvim" "$HOME_DIR/.config/nvim"
 link_file "$DOTFILES_DIR/config/ghostty/config.ghostty" "$HOME_DIR/.config/ghostty/config"
 # cmux app config (global). cmux only reads it; tracking it here version-controls it.
 link_file "$DOTFILES_DIR/config/cmux/cmux.json" "$HOME_DIR/.config/cmux/cmux.json"
+# web-fallback Claude skill (Jina + Brave fetch fallback for blocked pages).
+link_file "$DOTFILES_DIR/config/claude/skills/web-fallback" "$HOME_DIR/.claude/skills/web-fallback"
 link_file "$DOTFILES_DIR/zlogin" "$HOME_DIR/.zlogin"
 link_file "$DOTFILES_DIR/zprofile" "$HOME_DIR/.zprofile"
 link_file "$DOTFILES_DIR/zshenv" "$HOME_DIR/.zshenv"
