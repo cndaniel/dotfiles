@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# reveal-in-finder — show a path in Finder.
+#   file       -> `open -R`  (reveal & select it in its folder)
+#   directory  -> `open`     (open that folder)
+#
+# Why this exists: standalone Ghostty makes file paths ⌘-clickable, but the click
+# action is hard-coded to `open` (file -> default app, not Finder) and Ghostty's
+# custom `link` config is still unimplemented. So "reveal in Finder" can't be a
+# click; this is the tmux-side hook for it. Inside cmux this is harmless extra —
+# cmux keeps its own ⌘-click preview.
+#
+# Usage:
+#   reveal-in-finder <cwd> [path]
+#     <cwd>   base dir for resolving a relative path (tmux passes #{pane_current_path})
+#     [path]  the path; if omitted, read the clipboard (the selected text)
+set -euo pipefail
+
+cwd="${1:-$PWD}"
+target="${2:-$(pbpaste)}"
+
+# Collapse newlines and trim surrounding whitespace from a dragged selection.
+target="$(printf '%s' "$target" | tr -d '\r\n' | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')"
+[ -n "$target" ] || { echo "reveal: nothing selected / clipboard empty"; exit 1; }
+
+case "$target" in
+  "~"/*) target="${HOME}/${target#"~"/}" ;;   # expand a leading ~/
+  /*)    : ;;                                  # already absolute
+  *)     target="${cwd%/}/${target}" ;;        # resolve against the pane cwd
+esac
+
+# Compiler/grep output often appends :line[:col]; Finder can't take that. If the
+# literal path is missing but trimming the suffix finds it, use the trimmed one.
+if [ ! -e "$target" ]; then
+  trimmed="${target%%:[0-9]*}"
+  [ -e "$trimmed" ] && target="$trimmed"
+fi
+
+if [ -d "$target" ]; then
+  open "$target"
+elif [ -e "$target" ]; then
+  open -R "$target"
+else
+  echo "reveal: not found: $target"
+  exit 1
+fi
