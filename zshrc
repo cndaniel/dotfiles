@@ -31,3 +31,20 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 # Added by Claudepot — third-party route wrappers on PATH
 export PATH="$HOME/.claudepot/bin:$PATH"
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integration.zsh" ]; then
+  . "$OTTY_SHELL_INTEGRATION/otty-integration.zsh"
+fi
+# <<< otty shell integration <<<
+
+# zoxide — initialized dead-last, after the configs/* loop AND the Otty integration
+# above. Its doctor warns whenever another tool registers a chpwd hook after it, so
+# this must be the final hook-registering line of the whole startup. Don't add any
+# chpwd-based tool (mise/direnv/etc.) below this.
+if command -v zoxide >/dev/null 2>&1; then
+  # replace cd with zoxide: `cd <partial>` jumps to a frecent match; `cdi` to pick
+  eval "$(zoxide init zsh --cmd cd)"
+fi

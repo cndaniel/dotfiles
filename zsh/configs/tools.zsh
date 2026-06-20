@@ -58,10 +58,6 @@ fi
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# zoxide must be initialized LAST: its doctor warns ("initialize zoxide right at
-# the end…") whenever another tool registers a chpwd hook after it. Keep this the
-# final hook-registering line — don't add mise/direnv/anything chpwd-based below.
-if command -v zoxide >/dev/null 2>&1; then
-  # replace cd with zoxide: `cd <partial>` jumps to a frecent match; `cdi` to pick
-  eval "$(zoxide init zsh --cmd cd)"
-fi
+# zoxide init lives at the very END of ~/.zshrc — not here. It must be the last
+# tool to register a chpwd hook, and this configs/* file is sourced before .zshrc's
+# trailing lines (aliases, private, and the Otty shell-integration block). See zshrc.
