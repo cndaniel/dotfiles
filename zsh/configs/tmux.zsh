@@ -30,7 +30,7 @@ _tmux_ensure_session() {
 
 _tmux_supported_terminal() {
   case "${TERM_PROGRAM:-}" in
-    WarpTerminal|vscode)
+    WarpTerminal|vscode|otty)
       return 1
       ;;
   esac
