@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Status-right segment: count windows whose Claude is done / awaiting input.
+# Prints nothing when zero, so the status bar stays clean. Usage: tmux-claude-count <session>
+#
+sess="$1"
+n=$(tmux list-windows ${sess:+-t "$sess"} -F '#{@claude}' 2>/dev/null \
+  | grep -cE '^(done|input)$')
+
+[ "${n:-0}" -gt 0 ] && printf '#[fg=#e0af68,bg=#1a1b26,bold] ◉ %s #[default]' "$n"
+exit 0

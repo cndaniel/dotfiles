@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Jump to the next window in this session whose Claude is done / awaiting input
+# (the @claude flag set by claude-tmux-state). Bound to prefix+Tab.
+#
+sess=$(tmux display-message -p '#{session_name}')
+cur=$(tmux display-message -p '#{window_index}')
+
+wins=$(tmux list-windows -t "$sess" -F '#{window_index} #{@claude}' \
+  | awk '$2 == "done" || $2 == "input" { print $1 }')
+
+if [ -z "$wins" ]; then
+  tmux display-message "No Claude waiting"
+  exit 0
+fi
+
+# First flagged window after the current index; wrap to the first otherwise.
+next=$(printf '%s\n' "$wins" | awk -v c="$cur" '$1 > c { print; exit }')
+[ -n "$next" ] || next=$(printf '%s\n' "$wins" | head -n1)
+
+tmux select-window -t "$sess:$next"

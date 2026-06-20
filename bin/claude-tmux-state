@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Flag the calling Claude Code session's tmux window with its lifecycle state,
+# so tmux window-status colours show which Claude is busy / done / awaiting input.
+#
+# Driven by Claude Code hooks in ~/.claude/settings.json:
+#   UserPromptSubmit -> busy   Stop -> done   Notification -> input   SessionEnd -> clear
+#
+# Hooks inherit $TMUX_PANE when Claude runs inside tmux; no-op otherwise.
+# Usage: claude-tmux-state <busy|done|input|clear>
+#
+[ -n "${TMUX_PANE:-}" ] || exit 0
+command -v tmux >/dev/null 2>&1 || exit 0
+
+case "${1:-clear}" in
+  busy|done|input) tmux set-option -w  -t "$TMUX_PANE" @claude "$1" 2>/dev/null ;;
+  *)               tmux set-option -wu -t "$TMUX_PANE" @claude     2>/dev/null ;;
+esac
+exit 0
