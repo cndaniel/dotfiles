@@ -25,3 +25,5 @@ node_modules/
 .idea/
 .vscode/settings.json
 *.code-workspace
+
+**/.claude/settings.local.json
